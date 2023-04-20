@@ -184,7 +184,7 @@ class DDPG(Agent):
         if explore and np.random.random()< self.epsilon:
             action += self.noise.sample()
         action = action.numpy()
-        return action
+        return return np.clip(action, self.lower_action_bound, self.upper_action_bound)
 
 
     def update(self, batch: Transition) -> Dict[str, float]:
